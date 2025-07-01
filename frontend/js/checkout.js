@@ -34,7 +34,7 @@ document.getElementById("formCheckout").addEventListener("submit", async functio
     
     // 2. Montar a requisição para a API
     try {
-        const response = await fetch('${API_BASE_URL}/api/pedidos', {
+        const response = await fetch(`${API_BASE_URL}/api/pedidos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
