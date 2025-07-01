@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos - MySneaker</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="js/adminAuth.js" defer></script>
+</head>
+<body>
+    <div class="container my-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Gerenciar Produtos</h2>
+        <div>
+          <a href="admin.html" class="btn btn-secondary">Voltar ao Painel</a>
+          <button class="btn btn-success" id="btnAdicionar">Adicionar Novo Produto</button>
+        </div>
+      </div>
+
+      <table class="table table-dark table-striped mt-4">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="product-table-body">
+          </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade" id="produtoModal" tabindex="-1">
+      <div class="modal-dialog modal-lg text-dark">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitulo">Adicionar Novo Produto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="produtoForm">
+              <input type="hidden" id="produtoId">
+              <div class="mb-3">
+                <label for="formNome" class="form-label">Nome do Produto</label>
+                <input type="text" class="form-control" id="formNome" name="nome" required>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="formPreco" class="form-label">Preço</label>
+                  <input type="number" class="form-control" id="formPreco" name="preco" step="0.01" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="formEstoque" class="form-label">Estoque</label>
+                  <input type="number" class="form-control" id="formEstoque" name="estoque" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="formParcela" class="form-label">Parcelamento</label>
+                <input type="text" class="form-control" id="formParcela" name="parcela">
+              </div>
+              <div class="mb-3">
+                <label for="formDescricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="formDescricao" name="descricao" rows="3"></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="formCores" class="form-label">Cores (separadas por vírgula)</label>
+                  <input type="text" class="form-control" id="formCores" name="cores">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="formTamanhos" class="form-label">Tamanhos (separados por vírgula)</label>
+                  <input type="text" class="form-control" id="formTamanhos" name="tamanhos">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="formImagem" class="form-label">Imagem Principal</label>
+                <input class="form-control" type="file" id="formImagem" name="imagem">
+              </div>
+              <div class="mb-3">
+                <label for="formCarrossel" class="form-label">Imagens do Carrossel (múltiplas)</label>
+                <input class="form-control" type="file" id="formCarrossel" name="carrosselImagens" multiple>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/admin-produtos.js" defer></script>
+</body>
+</html>
