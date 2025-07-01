@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = document.getElementById('senha').value;
 
             try {
-                const response = await fetch('${API_BASE_URL}/api/register', {
+                const response = await fetch(`${API_BASE_URL}/api/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = document.getElementById('senha').value;
 
             try {
-                const response = await fetch('${API_BASE_URL}/api/login', {
+                const response = await fetch(`${API_BASE_URL}/api/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
