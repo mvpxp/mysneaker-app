@@ -37,7 +37,8 @@ A MySneaker é uma loja online fictícia de calçados que apresenta uma interfac
 | JavaScript  | Interações básicas                            |
 | Git         | Controle de versão                            |
 | GitHub      | Hospedagem do repositório e deploy            |
-| Vercel / GitHub Pages | Deploy da aplicação frontend         |
+| Render      | Deploy da aplicação backend                   |
+| Vercel      | Deploy da aplicação frontend                  |
 
 ---
 
