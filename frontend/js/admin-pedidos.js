@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('order-table-body');
     const token = localStorage.getItem('jwtToken');
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
 
     const pedidoModal = new bootstrap.Modal(document.getElementById('pedidoModal'));
     const pedidoModalBody = document.getElementById('pedidoModalBody');

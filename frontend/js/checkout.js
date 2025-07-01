@@ -1,4 +1,5 @@
 document.getElementById("formCheckout").addEventListener("submit", async function(e) {
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
     e.preventDefault(); // Impede o recarregamento da página
 
     // 1. Coletar os dados
@@ -33,7 +34,7 @@ document.getElementById("formCheckout").addEventListener("submit", async functio
     
     // 2. Montar a requisição para a API
     try {
-        const response = await fetch('http://localhost:3000/api/pedidos', {
+        const response = await fetch('${API_BASE_URL}/api/pedidos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

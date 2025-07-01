@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const listaProdutos = document.getElementById('lista-produtos');
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
 
     // Função para buscar os produtos da API, agora aceitando um parâmetro de ordenação
     const fetchProdutos = async (sort = 'recente') => {

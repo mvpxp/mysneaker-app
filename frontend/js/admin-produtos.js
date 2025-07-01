@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productTableBody = document.getElementById('product-table-body');
     const token = localStorage.getItem('jwtToken');
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
 
     // --- Selecionando os elementos do Modal ---
     const produtoModal = new bootstrap.Modal(document.getElementById('produtoModal'));

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userTableBody = document.getElementById('user-table-body');
     const token = localStorage.getItem('jwtToken');
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
 
     const fetchAndRenderUsers = async () => {
         try {

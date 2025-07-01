@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    const API_BASE_URL = 'https://mysneaker-api.onrender.com';
     const produtoContainer = document.getElementById('produto-container');
 
     // 1. Pega o ID do produto da URL
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Define a função principal que busca os dados na API
     const fetchProduto = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/produtos/${produtoId}`);
+            const response = await fetch(`${API_BASE_URL}/api/produtos/${produtoId}`);
             if (!response.ok) {
                 throw new Error('Produto não encontrado.');
             }
