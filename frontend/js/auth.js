@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('jwtToken', data.token);
 
                 alert('Cadastro realizado com sucesso! Você será redirecionado.');
-                window.location.href = 'home.html';
+                window.location.href = 'index.html';
 
             } catch (error) {
                 alert(`Erro: ${error.message}`);
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('jwtToken', data.token);
 
                 alert('Login realizado com sucesso! Você será redirecionado.');
-                window.location.href = 'home.html';
+                window.location.href = 'index.html';
 
             } catch (error) {
                 alert(`Erro: ${error.message}`);

@@ -135,27 +135,29 @@ router.put(
   '/produtos/:id',
   proteger,
   admin,
-  upload.array('carrosselImagens', 5),
+  // CORREÇÃO: Usando upload.fields() para ser consistente com a rota POST
+  upload.fields([
+    { name: 'imagem', maxCount: 1 },
+    { name: 'carrosselImagens', maxCount: 5 }
+  ]),
   async (req, res) => {
-    console.log('DADOS DE TEXTO RECEBIDOS (req.body):', req.body);
-    console.log('ARQUIVOS RECEBIDOS (req.files):', req.files);
     try {
-      // Começamos com os dados de texto que podem ter sido enviados
       const dadosParaAtualizar = { ...req.body };
 
-      // Verificamos se novos arquivos de carrossel foram enviados na requisição
-      if (req.files && req.files.length > 0) {
-        // Mapeia os arquivos enviados para seus caminhos relativos
-        const caminhosCarrossel = req.files.map(file => `src/produtos/${file.filename}`);
-        
-        // Adiciona/sobrescreve o campo 'carrossel' nos dados a serem atualizados
-        // Isso substituirá o carrossel antigo pelas novas imagens
+      // Se uma nova imagem principal foi enviada, atualiza o caminho dela
+      if (req.files && req.files.imagem) {
+        dadosParaAtualizar.img = `src/produtos/${req.files.imagem[0].filename}`;
+      }
+
+      // Se novas imagens do carrossel foram enviadas, substitui o carrossel antigo
+      if (req.files && req.files.carrosselImagens) {
+        const caminhosCarrossel = req.files.carrosselImagens.map(file => `src/produtos/${file.filename}`);
         dadosParaAtualizar.carrossel = caminhosCarrossel;
       }
 
       const produto = await Produto.findByIdAndUpdate(
         req.params.id,
-        dadosParaAtualizar, // Passa o objeto com todas as atualizações
+        dadosParaAtualizar,
         { new: true, runValidators: true }
       );
 
@@ -170,7 +172,6 @@ router.put(
     }
   }
 );
-
 
 // --- DELETE (EXCLUSÃO) ---
 

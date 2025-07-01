@@ -55,7 +55,7 @@ document.getElementById("formCheckout").addEventListener("submit", async functio
         // 3. Se tudo deu certo, limpa o carrinho e avisa o usuário
         alert("Pedido finalizado com sucesso!");
         localStorage.removeItem("carrinho");
-        window.location.href = "home.html"; // Redireciona para a home
+        window.location.href = "index.html"; // Redireciona para a index
 
     } catch (error) {
         alert(`Erro: ${error.message}`);

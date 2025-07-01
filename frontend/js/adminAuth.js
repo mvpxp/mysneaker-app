@@ -13,6 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (error) {
         alert("Acesso negado. Você não é um administrador.");
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
     }
 });
