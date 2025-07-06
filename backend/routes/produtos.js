@@ -3,19 +3,23 @@ const router = express.Router();
 const proteger = require('../middleware/auth'); // Middleware de autenticação
 const admin = require('../middleware/admin');
 const Produto = require('../models/Produto');   // Model de Produto
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer'); // <-- Importe o multer
 const path = require('path');
 
 // --- CONFIGURAÇÃO DO MULTER ---
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // Define a pasta de destino das imagens
-    // O caminho é relativo à raiz do seu projeto backend
-    cb(null, '../frontend/src/produtos/'); 
-  },
-  filename: function (req, file, cb) {
-    // Cria um nome de arquivo único para evitar conflitos
-    cb(null, Date.now() + path.extname(file.originalname));
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'MySneaker', // Nome da pasta onde as imagens ficarão no Cloudinary
+    allowed_formats: ['jpeg', 'png', 'jpg'] // Formatos permitidos
   }
 });
 
@@ -97,12 +101,12 @@ router.post(
     if (!req.files || !req.files.imagem) {
       return res.status(400).json({ erro: 'A imagem principal (campo "imagem") é obrigatória.' });
     }
-    const caminhoImagemPrincipal = `src/produtos/${req.files.imagem[0].filename}`;
+    const caminhoImagemPrincipal = req.files.imagem[0].path;
 
-    // Processamento do carrossel (opcional)
+    // Processamento do carrossel
     let caminhosCarrossel = [];
     if (req.files.carrosselImagens) {
-      caminhosCarrossel = req.files.carrosselImagens.map(file => `src/produtos/${file.filename}`);
+      caminhosCarrossel = req.files.carrosselImagens.map(file => file.path);
     }
     
     // Conversão dos arrays de texto
@@ -135,7 +139,6 @@ router.put(
   '/produtos/:id',
   proteger,
   admin,
-  // CORREÇÃO: Usando upload.fields() para ser consistente com a rota POST
   upload.fields([
     { name: 'imagem', maxCount: 1 },
     { name: 'carrosselImagens', maxCount: 5 }
@@ -144,14 +147,14 @@ router.put(
     try {
       const dadosParaAtualizar = { ...req.body };
 
-      // Se uma nova imagem principal foi enviada, atualiza o caminho dela
+      // Se uma nova imagem principal foi enviada, usa o path (URL) do Cloudinary
       if (req.files && req.files.imagem) {
-        dadosParaAtualizar.img = `src/produtos/${req.files.imagem[0].filename}`;
+        dadosParaAtualizar.img = req.files.imagem[0].path;
       }
 
-      // Se novas imagens do carrossel foram enviadas, substitui o carrossel antigo
+      // Se novas imagens do carrossel foram enviadas, usa os paths (URLs) do Cloudinary
       if (req.files && req.files.carrosselImagens) {
-        const caminhosCarrossel = req.files.carrosselImagens.map(file => `src/produtos/${file.filename}`);
+        const caminhosCarrossel = req.files.carrosselImagens.map(file => file.path);
         dadosParaAtualizar.carrossel = caminhosCarrossel;
       }
 
@@ -172,6 +175,7 @@ router.put(
     }
   }
 );
+
 
 // --- DELETE (EXCLUSÃO) ---
 

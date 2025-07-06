@@ -40,6 +40,7 @@ A MySneaker é uma loja online fictícia de calçados que apresenta uma interfac
 | Render      | Deploy da aplicação                           |
 | MongoDB     | Banco de dados                                |
 | Insomnia    | Testes de requisições API                     |
+| Cloudinary  | Imagens dos produtos                          |
 
 
 ---
