@@ -10,23 +10,28 @@ const pedidoRoutes = require('./routes/pedidos');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
-const PORT = 3000;
+// CORREÇÃO 1: Usar a porta do ambiente de produção ou 3000 como padrão
+const PORT = process.env.PORT || 3000;
 
 // Conecta ao Banco de Dados
 connectDB();
 
+// Middlewares
 app.use(cors());
-// Middleware para interpretar JSON
 app.use(express.json());
 
-// Usando as rotas
-// Todas as rotas dentro de 'userAuthRoutes' começarão com /api
+// --- ROTA DE HEALTH CHECK (A PARTE QUE FALTAVA) ---
+// Esta rota responde ao Render para dizer que a API está no ar.
+app.get('/', (req, res) => {
+  res.send('API da MySneaker está no ar e funcionando!');
+});
+// --------------------------------------------------
+
+// Usando as rotas da API (todas começarão com /api)
 app.use('/api', userAuthRoutes);
-
-// Todas as rotas dentro de 'produtoRoutes' também começarão com /api
 app.use('/api', produtoRoutes);
-
 app.use('/api', pedidoRoutes);
 app.use('/api', adminRoutes);
 
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));
+// Inicia o servidor na porta correta
+app.listen(PORT, () => console.log(`Servidor rodando na porta: ${PORT}`));
